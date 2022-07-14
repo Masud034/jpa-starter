@@ -1,5 +1,6 @@
 package com.example.jpahibernate.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,5 +25,6 @@ public class PayStub {
     private long salary;
 
     @ManyToOne
+    @JsonIgnore
     private Employee employee;
 }

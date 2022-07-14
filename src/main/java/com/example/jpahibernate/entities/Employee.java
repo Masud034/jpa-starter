@@ -1,6 +1,7 @@
 package com.example.jpahibernate.entities;
 
 import com.example.jpahibernate.enums.EmployeeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,5 +32,6 @@ public class Employee {
     private List<PayStub> payStub = new ArrayList<>();
 
     @ManyToMany
+    @JsonIgnore
     private List<EmailGroup> emailGroupList = new ArrayList<>();
 }

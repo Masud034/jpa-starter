@@ -18,4 +18,9 @@ public class EmailGroupController {
     public EmailGroup addEmailGroup(@PathVariable int empId, @RequestBody EmailGroup emailGroup) {
         return emailGroupService.addEmailGroup(empId, emailGroup);
     }
+
+    @GetMapping(value = "/group/{groupId}")
+    public EmailGroup getEmailGroup(@PathVariable int groupId) {
+        return emailGroupService.getEmailGroup(groupId);
+    }
 }

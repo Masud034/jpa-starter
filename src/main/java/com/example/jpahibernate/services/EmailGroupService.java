@@ -23,16 +23,25 @@ public class EmailGroupService {
         final EmailGroup[] savedEmailGroup = new EmailGroup[1];
 
         employee.ifPresentOrElse((emp) -> {
-                    emailGroup.getEmployeeList().add(emp);
-                    savedEmailGroup[0] = emailGroupRepository.save(emailGroup);
+            Optional<EmailGroup> optionalEmailGroup = emailGroupRepository.findByName(emailGroup.getName());
+            optionalEmailGroup.ifPresentOrElse((foundGroup) -> {
+                        foundGroup.getEmployeeList().add(emp);
+                        savedEmailGroup[0] = emailGroupRepository.save(foundGroup);
+                    }
+                    , () -> {
+                        emailGroup.getEmployeeList().add(emp);
+                        savedEmailGroup[0] = emailGroupRepository.save(emailGroup);
+                    });
+            emp.getEmailGroupList().add(savedEmailGroup[0]);
+            employeeRepository.save(emp);
+        }, () -> {
+            throw new RuntimeException("Employee Not Found");
+        });
 
-                    emp.getEmailGroupList().add(savedEmailGroup[0]);
-                    employeeRepository.save(emp);
-                },
-                () -> {
-                    throw new RuntimeException("Employee Not Found");
-                }
-        );
         return savedEmailGroup[0];
+    }
+
+    public EmailGroup getEmailGroup(int groupId) {
+        return emailGroupRepository.findById(groupId).get();
     }
 }

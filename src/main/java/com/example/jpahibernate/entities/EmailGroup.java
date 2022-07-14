@@ -21,6 +21,5 @@ public class EmailGroup {
     private String name;
 
     @ManyToMany(mappedBy = "emailGroupList")
-    @JsonIgnore
     private List<Employee> employeeList = new ArrayList<>();
 }
