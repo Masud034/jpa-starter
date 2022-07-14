@@ -21,6 +21,7 @@ public class Employee {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private EmployeeType type;
 
     @OneToOne
@@ -28,4 +29,7 @@ public class Employee {
 
     @OneToMany
     private List<PayStub> payStub = new ArrayList<>();
+
+    @ManyToMany
+    private List<EmailGroup> emailGroupList = new ArrayList<>();
 }
