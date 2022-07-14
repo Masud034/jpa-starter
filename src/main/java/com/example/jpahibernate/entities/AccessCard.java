@@ -1,5 +1,6 @@
 package com.example.jpahibernate.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,8 +20,5 @@ public class AccessCard {
 
     private LocalDate issuedAt;
 
-    private boolean isActive;
-
-    @OneToOne(mappedBy = "card")
-    private Employee employee;
+    private boolean active;
 }

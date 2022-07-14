@@ -1,5 +1,6 @@
 package com.example.jpahibernate.entities;
 
+import com.example.jpahibernate.enums.EmployeeType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,7 +21,9 @@ public class Employee {
 
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    private EmployeeType type;
+
+    @OneToOne
     private AccessCard card;
 
     @OneToMany
