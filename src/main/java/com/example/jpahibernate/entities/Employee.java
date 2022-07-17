@@ -28,10 +28,14 @@ public class Employee {
     @OneToOne
     private AccessCard card;
 
-    @OneToMany
+    @OneToMany(mappedBy = "employee") //mapped by stops JPA from creating separate table for Employee-Paystub
     private List<PayStub> payStub = new ArrayList<>();
 
     @ManyToMany
     @JsonIgnore
+    @JoinTable(name = "email_group_subscriptions",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "email_group_subscription_id")
+    )
     private List<EmailGroup> emailGroupList = new ArrayList<>();
 }

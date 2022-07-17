@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,5 +19,10 @@ public class EmployeeService {
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
+    }
+
+    public void deleteEmployee(int id) {
+        Optional<Employee> employee = employeeRepository.findById(id);
+        employee.ifPresentOrElse(employeeRepository::delete,()-> {throw new RuntimeException("User Not Found");});
     }
 }

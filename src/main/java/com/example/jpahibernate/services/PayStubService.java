@@ -30,4 +30,9 @@ public class PayStubService {
         );
         return savedPayStub[0];
     }
+
+    public void deletePaystub(int empId, int id) {
+        Optional<PayStub> payStub = payStubRepository.findById(id);
+        payStub.ifPresentOrElse(payStubRepository::delete,()-> {throw new RuntimeException("PayStub Not Found");});
+    }
 }

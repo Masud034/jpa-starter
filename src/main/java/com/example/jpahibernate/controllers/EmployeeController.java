@@ -3,11 +3,9 @@ package com.example.jpahibernate.controllers;
 import com.example.jpahibernate.entities.Employee;
 import com.example.jpahibernate.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.PublicKey;
 import java.util.List;
 
 @RestController
@@ -16,7 +14,7 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping(value = "/employee/add")
+    @PostMapping(value = "/employees")
     public Employee addEmployee(@RequestBody Employee employee) {
         return employeeService.addEmployee(employee);
     }
@@ -24,5 +22,10 @@ public class EmployeeController {
     @GetMapping(value = "/employees")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
+    }
+
+    @DeleteMapping(value = "/employees/{id}")
+    public void deleteEmployee(@PathVariable int id) {
+        employeeService.deleteEmployee(id);
     }
 }

@@ -26,5 +26,6 @@ public class PayStub {
 
     @ManyToOne
     @JsonIgnore
+    @JoinColumn(name = "paystub_for")
     private Employee employee;
 }
